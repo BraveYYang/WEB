@@ -26,8 +26,8 @@ tag: tig
 
 - #### 1.注册GitHub账号
 
-  - 账号：903372205@qq.com
-  - 密码：sunyangyangwoaini520
+  - 账号：1
+  - 密码：1
 
 - #### 2.git注册
 
@@ -53,12 +53,12 @@ tag: tig
 
 
 ```
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDHszyIXIfiK1iNVj5Glw06+B8dqFpgpMHaGBKdlG5yzv+niCRY45i+Vvr8uQlKnSo/dv95vcrGAh1kwUuoCW0chXIAfOodaoucoEQlOhsfCV49llBIXrVY5p9iFvbl26uUXFcXG2awLAhtkgbpa1B7OMX+h/KRtRZAMdeshNdMPuFLcTXvBzxWWkQy3xu2gKiOwVGCvYPROnUZR4ZXjrTOZF2Slx8/MHpq6xpP//RbGvF8RMeYPWJPmED/6dT9rMWObE0qV4fSZ/KjOkQR8oIhRwEWx+fo6uwoU1RZejhRzNl5K74YdPBfS0VpwG3XkGHD+4UsgZWokNvvwkOlI4GXcjasKyFYNfQmFbffUsbFSdAEkQZ07c4LF+ZzU/d6hVFUXvWpb+Cl+i1aGSpyho5kzlCzacEe/qZI/vdcQNo+oMREU3kWP5lx2fZPG6LbrBFgVcFr/4jiLIfg3sWVR6ImR1znYbkpgc5MI4lFt6vVJAEr+Y5ydLXt05DVXO1DWd8= 903372205@qq.com
+	ssh-rsa AAAAB3NzaC1yc2EA...
 ```
 
 - **github->账户->setting**
 
-  - Title：CXSW114008
+  - Title：1
   - Key type：Authentication Key
 
 - #### 5.测试是否成功连接
@@ -99,6 +99,9 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDHszyIXIfiK1iNVj5Glw06+B8dqFpgpMHaGBKdlG5y
     
     //将修改操作的文件和未跟踪新添加的文件添加到git系统的暂存区，注意不包括删除  
 	$ git add .   
+	
+	//将文件包的所有文件加入暂存区
+	$ git add -f .
     
     //将已跟踪文件中的修改和删除的文件添加到暂存区，不包括新增加的文件，注意这些被删除的文件被加入到暂存区再被提交并推送到服务器的版本库之后这个文件就会从git系统中消失了。 
 	$ git add -u 
@@ -278,6 +281,18 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDHszyIXIfiK1iNVj5Glw06+B8dqFpgpMHaGBKdlG5y
 	hint: 'git pull' before pushing again.
 	hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 	直接git pull之后就可以了
+	
+	//删除现有远程仓库
+	$ git remote rm origin
+	
+	//添加新远程仓库
+	$ git remote add origin url
+	
+	//查看远程仓库的地址
+	$ git remote -v
+	
+	//更换远程仓库地址，URL为新地址
+	$ git remote set-url origin URL
 ```
 
 - #### 暂存空间使用
