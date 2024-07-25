@@ -1,35 +1,45 @@
 ---
 title: Git使用
-tag: tig
+tag: git
+categories: Git
 ---
 # Git使用
 
-### 一、git基本了解
+## git基本了解
 
-- #### 1.学习资料
+### 学习资料
 
-  - [超详细的Git使用教程(图文)-CSDN博客](https://blog.csdn.net/qq_37883866/article/details/105349257)
-  - [Git基本使用教程（一）：入门及第一次基本完整操作_git的使用-CSDN博客](https://blog.csdn.net/qq_35206244/article/details/97698815)
-  - [git--一文弄懂git的工作区、索引区、本地仓库、远程仓库以及add、commit、push三个操作 - at_today - 博客园 (cnblogs.com)](https://www.cnblogs.com/Jing-Wang/p/10991008.html)
-  - [【原创】Git删除暂存区或版本库中的文件 - cposture - 博客园 (cnblogs.com)](https://www.cnblogs.com/cposture/p/git.html)
-  - [Git如何从暂存区（index/cache）中移除文件|极客教程 (geek-docs.com)](https://geek-docs.com/git/git-questions/611_git_how_to_remove_a_file_from_the_staging_area_index_cache_in_git.html)
-  - [git status 状态命令——查看文件状态_git status 看非新增文件-CSDN博客](https://blog.csdn.net/weixin_44567318/article/details/119701438)
-  - [Git 学习（三）本地仓库操作——git add & commit - feesland - 博客园 (cnblogs.com)](https://www.cnblogs.com/feeland/p/4500721.html)
-  - [git branch的详细使用，10个常见用法_git branch -vv-CSDN博客](https://blog.csdn.net/chaogu94/article/details/111057918)
-  - [Git基础 - git tag 一文真正的搞懂git标签的使用-CSDN博客](https://blog.csdn.net/qq_39505245/article/details/124705850)
+[超详细的Git使用教程(图文)-CSDN博客](https://blog.csdn.net/qq_37883866/article/details/105349257)
 
-- #### 2.git下载
+[Git基本使用教程（一）：入门及第一次基本完整操作_git的使用-CSDN博客](https://blog.csdn.net/qq_35206244/article/details/97698815)
 
-  - **官网：** https://git-scm.com/downloads
+[git--一文弄懂git的工作区、索引区、本地仓库、远程仓库以及add、commit、push三个操作 - at_today - 博客园 (cnblogs.com)](https://www.cnblogs.com/Jing-Wang/p/10991008.html)
 
-### 二、git使用方法
+[【原创】Git删除暂存区或版本库中的文件 - cposture - 博客园 (cnblogs.com)](https://www.cnblogs.com/cposture/p/git.html)
 
-- #### 1.注册GitHub账号
+[Git如何从暂存区（index/cache）中移除文件|极客教程 (geek-docs.com)](https://geek-docs.com/git/git-questions/611_git_how_to_remove_a_file_from_the_staging_area_index_cache_in_git.html)
 
-  - 账号：1
-  - 密码：1
+[git status 状态命令——查看文件状态_git status 看非新增文件-CSDN博客](https://blog.csdn.net/weixin_44567318/article/details/119701438)
 
-- #### 2.git注册
+[Git 学习（三）本地仓库操作——git add & commit - feesland - 博客园 (cnblogs.com)](https://www.cnblogs.com/feeland/p/4500721.html)
+
+[git branch的详细使用，10个常见用法_git branch -vv-CSDN博客](https://blog.csdn.net/chaogu94/article/details/111057918)
+
+[Git基础 - git tag 一文真正的搞懂git标签的使用-CSDN博客](https://blog.csdn.net/qq_39505245/article/details/124705850)
+
+### git下载
+
+**官网：** https://git-scm.com/downloads
+
+## git使用方法
+
+### 注册GitHub账号
+
+账号：1
+
+密码：1
+
+### git注册
 
 ```
 	//设置账号，如果去掉 --global 参数只对当前仓库有效。
@@ -47,21 +57,22 @@ tag: tig
 	id_rsa为私人密钥
 ```
 
-- #### 4.github配置SSH
+### github配置SSH
 
-  - **打开id_rsa.pub文件，全选，复制全文**
+**打开id_rsa.pub文件，全选，复制全文**
 
 
 ```
 	ssh-rsa AAAAB3NzaC1yc2EA...
 ```
 
-- **github->账户->setting**
+**github->账户->setting**
 
-  - Title：1
-  - Key type：Authentication Key
+Title：1
 
-- #### 5.测试是否成功连接
+Key type：Authentication Key
+
+### 测试是否成功连接
 
 ```
 	$ ssh -T git@github.com
@@ -69,13 +80,15 @@ tag: tig
 	Hi yangyangdeyi0119! You've successfully authenticated, but GitHub does not provide shell access.  
 ```
 
-- #### 6.建立Github云端仓库
+### 建立Github云端仓库
 
-  - [github仓库建立及配置教程新手教程_github创建仓库-CSDN博客](https://blog.csdn.net/qq_44722674/article/details/117200397)
-  - 修改用户名
-    - [GitHub修改昵称和用户名（图解详细教程）_github改名-CSDN博客](https://blog.csdn.net/weixin_44285445/article/details/107833418)
+[github仓库建立及配置教程新手教程_github创建仓库-CSDN博客](https://blog.csdn.net/qq_44722674/article/details/117200397)
 
-- #### 6.创建本地仓库
+修改用户名
+
+[GitHub修改昵称和用户名（图解详细教程）_github改名-CSDN博客](https://blog.csdn.net/weixin_44285445/article/details/107833418)
+
+### 创建本地仓库
 
 ```
 	//首先需要新建一个文件夹作为本地仓库
@@ -86,9 +99,9 @@ tag: tig
 	$ git clone https://github.com/yangyangdeyi0119/test.git  
 ```
 
-- #### 7.将文件加入暂存区
+### 将文件加入暂存区
 
-  - 文件本身在工作区，需要通过文件锁定，将其加入暂存区
+文件本身在工作区，需要通过文件锁定，将其加入暂存区
 
 ```
 	//可以同时添加多个文件夹
@@ -117,7 +130,7 @@ tag: tig
 	- Staged 已暂存状态
 ```
 
-- #### 将文件移除暂存区
+### 将文件移除暂存区
 
 ```
 	//仅删除暂存区的文件，不影响工作区的文件
@@ -137,7 +150,7 @@ tag: tig
 	
 ```
 
-- #### 查看文件状态
+### 查看文件状态
 
 ```
 	//获取文件状态-完整
@@ -179,9 +192,9 @@ tag: tig
 		--stage(-s) 显示mode以及文件对应的Blob对象，进而我们可以获取暂存区中对应文件里面的内容。
 ```
 
-- #### 文件加入分支
+### 文件加入分支
 
-  - 提交更改，实际上就是把暂存区的所有内容提交到当前分支，需要提交的文件修改通通放到暂存区；然后，一次性提交暂存区的所有修改
+提交更改，实际上就是把暂存区的所有内容提交到当前分支，需要提交的文件修改通通放到暂存区；然后，一次性提交暂存区的所有修改
 
 ```
 	// 把暂存区的所有修改提交到分支，须输入描述信息
@@ -212,7 +225,7 @@ tag: tig
     git log --oneline
 ```
 
-- #### 分支管理
+### 分支管理
 
 ```
 	//创建分支命令
@@ -256,7 +269,7 @@ tag: tig
 	$ git push --set-upstream origin dev
 ```
 
-- #### 9.将文件推送到云端仓库
+### 将文件推送到云端仓库
 
 ```
 	//第一次推送代码指令
@@ -295,12 +308,15 @@ tag: tig
 	$ git remote set-url origin URL
 ```
 
-- #### 暂存空间使用
+### 暂存空间使用
 
-  - stash是本地的，不会通过git push命令上传到git server上
-  - 发现有一个类是多余的，想删掉它又担心以后需要查看它的代码，想保存它但又不想增加一个脏的提交。这时就可以考虑git stash。
-  - 使用git的时候，我们往往使用分支（branch）解决任务切换问题，例如，我们往往会建一个自己的分支去修改和调试代码, 如果别人或者自己发现原有的分支上有个不得不修改的bug，我们往往会把完成一半的代码commit提交到本地仓库，然后切换分支去修改bug，改好之后再切换回来。这样的话往往log上会有大量不必要的记录。其实如果我们不想提交完成一半或者不完善的代码，但是却不得不去修改一个紧急Bug，那么使用git stash就可以将你当前未提交到本地（和服务器）的代码推入到Git的栈中，这时候你的工作区间和上一次提交的内容是完全一样的，所以你可以放心的修Bug，等到修完Bug，提交到服务器上后，再使用git stash apply将以前一半的工作应用回来。
-  - 经常有这样的事情发生，当你正在进行项目中某一部分的工作，里面的东西处于一个比较杂乱的状态，而你想转到其他分支上进行一些工作。问题是，你不想提交进行了一半的工作，否则以后你无法回到这个工作点。解决这个问题的办法就是git stash命令。储藏(stash)可以获取你工作目录的中间状态——也就是你修改过的被追踪的文件和暂存的变更——并将它保存到一个未完结变更的堆栈中，随时可以重新应用。
+stash是本地的，不会通过git push命令上传到git server上
+
+发现有一个类是多余的，想删掉它又担心以后需要查看它的代码，想保存它但又不想增加一个脏的提交。这时就可以考虑git stash。
+
+使用git的时候，我们往往使用分支（branch）解决任务切换问题，例如，我们往往会建一个自己的分支去修改和调试代码, 如果别人或者自己发现原有的分支上有个不得不修改的bug，我们往往会把完成一半的代码commit提交到本地仓库，然后切换分支去修改bug，改好之后再切换回来。这样的话往往log上会有大量不必要的记录。其实如果我们不想提交完成一半或者不完善的代码，但是却不得不去修改一个紧急Bug，那么使用git stash就可以将你当前未提交到本地（和服务器）的代码推入到Git的栈中，这时候你的工作区间和上一次提交的内容是完全一样的，所以你可以放心的修Bug，等到修完Bug，提交到服务器上后，再使用git stash apply将以前一半的工作应用回来。
+
+经常有这样的事情发生，当你正在进行项目中某一部分的工作，里面的东西处于一个比较杂乱的状态，而你想转到其他分支上进行一些工作。问题是，你不想提交进行了一半的工作，否则以后你无法回到这个工作点。解决这个问题的办法就是git stash命令。储藏(stash)可以获取你工作目录的中间状态——也就是你修改过的被追踪的文件和暂存的变更——并将它保存到一个未完结变更的堆栈中，随时可以重新应用。
 
 ```
 	//将未提交的修改保存至堆栈中
@@ -331,11 +347,13 @@ tag: tig
 	$ git stash branch
 ```
 
-- #### 10.代码标签
+### 代码标签
 
-  - tag 中文我们可以称它为标签，tag 就是 对某次 commit 的一个标识，相当于起了一个别名。
-    - 【轻量标签 】： 只是某个commit 的引用，可以理解为是一个commit的别名；
-    - 【附注标签】 ：是存储在git仓库中的一个完整对象，包含打标签者的名字、电子邮件地址、日期时间以及其他的标签信息。它是可以被校验的，可以使用 GNU Privacy Guard (GPG) 签名并验证。
+tag 中文我们可以称它为标签，tag 就是 对某次 commit 的一个标识，相当于起了一个别名。
+
+【轻量标签 】： 只是某个commit 的引用，可以理解为是一个commit的别名；
+
+【附注标签】 ：是存储在git仓库中的一个完整对象，包含打标签者的名字、电子邮件地址、日期时间以及其他的标签信息。它是可以被校验的，可以使用 GNU Privacy Guard (GPG) 签名并验证。
 
 ```
 	//直接列出所有的标签
