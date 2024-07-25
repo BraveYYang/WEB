@@ -14,21 +14,21 @@ categories: Github
 
 例如 webname.github.io
 
-![image-20240724153741084](./../Image/image-20240724153741084.png)
+![image-20240724153741084.png](https://s2.loli.net/2024/07/25/CagbJOAwjnGZl5h.png)
 
 之后点击 Create repository ，创建该仓库，其他无需调整
 
 之后需要创建一个 index.html 文件，用于后续能够选取分支
 
-![image-20240724154237430](./../Image/image-20240724154237430.png)
+![image-20240724154237430.png](https://s2.loli.net/2024/07/25/fCE81aVXuvQHwkK.png)
 
 文件名字输入 index.html，内容为 `<hl> hello </hl>` 这个文件会初始化成一个网页，网页的内容只有 hello，这个随便填就行，后续会用模板，不用考虑这个
 
-![image-20240724154427037](./../Image/image-20240724154427037.png)
+![image-20240724154427037.png](https://s2.loli.net/2024/07/25/xcCAzGZfilE8pXI.png)
 
 进入仓库，选择 Setting ，点击 pages ，在 branch 上选择 main 分支（刚刚创建文件也是为了创建这个分支），点击 save 保存，之后等待几分钟，就会出现创建的网址，点击 visit site 即可进入建立的网页
 
-![image-20240724155135615](./../Image/image-20240724155135615.png)
+![image-20240724155135615.png](https://s2.loli.net/2024/07/25/iJS68ZOUrkLHKBo.png)
 
 完成这一步之后，就可以得到一个”hello“的网页，该网页没有任何排版和格式
 
@@ -95,7 +95,7 @@ git安装参考https://blog.csdn.net/mukes/article/details/115693833
 	  branch: master #如果分支是main记得修改，需要推送到哪个分支，就选择哪个分支
 ```
 
-![image-20240724161404111](./../Image/image-20240724161404111.png)
+![image-20240724161404111.png](https://s2.loli.net/2024/07/25/Us5zgjtJm8fKQ6X.png)
 
 部署到 GitHub
 
@@ -142,7 +142,7 @@ git安装参考https://blog.csdn.net/mukes/article/details/115693833
 
 之后重复上面的步骤先进行静态页面清除，再生成，之后上传到GitHub仓库中进行页面更新，等待几分钟后，如下图所示
 
-<img src="./../Image/image-20240724162639684.png" alt="image-20240724162639684" style="zoom:50%;" />
+![image-20240724162639684.png](https://s2.loli.net/2024/07/25/2wTjGbtilvdkBpW.png)
 
 ### 文档上传
 
