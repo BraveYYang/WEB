@@ -1,10 +1,10 @@
 ---
 title: Github+HEXO实现网站DIY
-tag: Github
+tag: Github_Pages
 categories: Github
 ---
 
-# Work No.6
+# Github+HEXO实现网站DIY
 
 ### 创建github.page网页
 
