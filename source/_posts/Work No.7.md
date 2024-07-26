@@ -1,6 +1,7 @@
 ---
 title: 3D打印机运行逻辑
 tag: 3D打印机
+date: 2024-07-26
 categories: 3D打印机
 ---
 

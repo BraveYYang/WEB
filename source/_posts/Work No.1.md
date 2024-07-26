@@ -1,6 +1,7 @@
 ---
 title: Linux环境安装和配置
 tags: Linux
+date: 2024-07-09
 categories: Linux
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: Gcode学习
 tag: Gcode
+date: 2024-07-24
 categories: 3D打印机
 ---
 
