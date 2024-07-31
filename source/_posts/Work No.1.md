@@ -3,6 +3,7 @@ title: Linux环境安装和配置
 tags: Linux
 date: 2024-07-09
 categories: Linux
+index_img: https://s2.loli.net/2024/07/31/buUim8aA5VDrt6d.png
 ---
 
 # Linux环境安装和配置

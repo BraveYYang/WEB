@@ -3,6 +3,7 @@ title: STM32程序逻辑及GPIO使用
 tag: GPIO
 date: 2024-07-10
 categories: STM32
+index_img: https://s2.loli.net/2024/07/31/aexKkm4IUZCT2DP.png
 ---
 
 # STM32程序逻辑及GPIO使用

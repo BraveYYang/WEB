@@ -3,6 +3,7 @@ title: STM32固件库及工程文件概念
 tag: 固件库
 date: 2024-06-30
 categories: STM32
+index_img: https://s2.loli.net/2024/07/31/KWuMZw2shPzoXiy.jpg
 ---
 
 # STM32固件库及工程文件概念

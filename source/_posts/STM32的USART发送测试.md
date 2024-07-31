@@ -3,6 +3,7 @@ title: STM32的USART发送测试
 tag: USART
 date: 2024-07-30
 categories: STM32
+index_img: https://s2.loli.net/2024/07/31/CsbJKkLaQt9OgVu.jpg
 ---
 
 # STM32的USART发送测试

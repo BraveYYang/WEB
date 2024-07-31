@@ -3,6 +3,7 @@ title: 3D打印机运行逻辑
 tag: 3D打印机
 date: 2024-07-26
 categories: 3D打印机
+index_img: https://s2.loli.net/2024/07/31/hRrLCWXmb3HwpID.png
 ---
 
 # 3D打印机运行逻辑

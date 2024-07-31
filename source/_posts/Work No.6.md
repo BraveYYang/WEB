@@ -3,6 +3,7 @@ title: Github+HEXO实现网站DIY
 tag: Github_Pages
 date: 2024-07-23
 categories: Github
+index_img: https://s2.loli.net/2024/07/31/AkJxXrnV57TZ4YP.jpg
 ---
 
 # Github+HEXO实现网站DIY

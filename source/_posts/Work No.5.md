@@ -3,6 +3,7 @@ title: Git使用
 tag: git
 date: 2024-07-19
 categories: Git
+index_img: https://s2.loli.net/2024/07/31/mBz1ZMHwft8nRUc.jpg
 ---
 # Git使用
 
