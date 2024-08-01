@@ -3,7 +3,7 @@ title: STM32的USART发送测试
 tag: USART
 date: 2024-07-30
 categories: STM32
-index_img: https://s2.loli.net/2024/07/31/CsbJKkLaQt9OgVu.jpg
+index_img: https://s2.loli.net/2024/07/31/ZmH82tMfGquLPEF.jpg
 ---
 
 # STM32的USART发送测试
@@ -40,7 +40,7 @@ USART_RX：接收数据输入引脚
 
 USART通常只能收发8位以内数据，最大为9位，第 9 位数据是否有效要取决于 USART控制寄存器 1(USART_CR1) 的 M 位设置，当 M 位为 0 时表示 8 位数据字长，当 M 位为 1 表示 9位数据字长
 
-接下来是代码的编写，步骤为打开GPIO、USART1的时钟、GPIO口初始化、GPIO_USART初始化、串口中断优先级配置（接收数据或者发送数据都需要随时进行触发，在函数运行时也有可能收到或者发送数据，所以需要对USART进行中断配置）、中断串口使能、串口使能
+接下来是代码的编写，步骤为打开GPIO、USART1的时钟、GPIO口初始化、GPIO_USART初始化、串口中断优先级配置、中断串口使能、串口使能
 
 #### 初始化GPIO和GPIO_USART
 
@@ -84,30 +84,6 @@ RX串口要设置成浮空输入模式，因为不能上升沿或者下降沿，
 	USART_InitStructure.USART_Parity = USART_Parity_No;  //设置校验位不打开
 	USART_InitStructure.USART_WordLength =USART_WordLength_8b;  //设置数据长度为8位
 	USART_Init(USART1, &USART_InitStructure);  //将结构体进行定义
-```
-
-#### 中断优先级配置
-
-这个跟上节中断的一样，可以参照中断配置，这个主要为内部中断配置，而不是外部中断配置，因为外部中断是真的中断，USART有属于自己的额外的中断线，所以配置USART约等于配置了外部中断，所以只需要内部中断即可
-
-```
-	//定义结构体
-	NVIC_InitTypeDef  NVIC_InitStruct;
-	
-	//NVIC初始化
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//配置组优先级（0，1，2，3，4，5）
-	NVIC_InitStruct.NVIC_IRQChannel = USART1_IRQn;//配置内部中断线
-	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 1;//配置抢占优先级
-	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 1;//配置子优先级
-	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;//使能中断通道
-	NVIC_Init(&NVIC_InitStruct);//将结构体进行定义
-```
-
-#### 中断串口和串口使能
-
-```
-	// 使能串口接收中断
-	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);	
 	
 	// 使能串口
 	USART_Cmd(USART1, ENABLE);	
