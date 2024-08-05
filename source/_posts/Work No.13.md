@@ -91,7 +91,7 @@ index_img: https://s2.loli.net/2024/07/31/b1YNChod7EyzTsF.jpg
 
 内存：就是存放东西的空间
 
-![img](https://i-blog.csdnimg.cn/blog_migrate/8eafbb6548c929bc99f94ef018128c1a.png)![img](https://i-blog.csdnimg.cn/blog_migrate/dba3cdc29d8127ee60c8ca0446bf23fe.png)
+![8eafbb6548c929bc99f94ef018128c1a.png](https://s2.loli.net/2024/08/05/NIi8RQXMkglrqeC.png)![dba3cdc29d8127ee60c8ca0446bf23fe.png](https://s2.loli.net/2024/08/05/Si3Oj5NPpr6Lz1h.png)
 
 左图就是内存，这个内存中有9个空间，一个空间代表一个字节
 
