@@ -8,6 +8,12 @@ index_img: https://s2.loli.net/2024/07/31/b1YNChod7EyzTsF.jpg
 
 # C语言指针学习
 
+### 感谢博主：
+
+[指针基础知识理解（简单、易懂、超详细！！！！）_史上最全指针解释-CSDN博客](https://blog.csdn.net/weixin_45031801/article/details/127017272)
+
+[让你不再害怕指针——C指针详解(经典,非常详细)_c语言指针-CSDN博客](https://blog.csdn.net/soonfly/article/details/51131141)
+
 ### 计算机的语言表示
 
 在现代的计算机中主要采用的数字集成电路完成，数字电路通过高低电平只能表示**0和1**，所以就出现了，计算机只会识别**0和1**。无论是存储还是计算，计算机均采用二进制体系完成。

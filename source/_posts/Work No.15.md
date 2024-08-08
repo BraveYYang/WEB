@@ -8,6 +8,12 @@ index_img: https://s2.loli.net/2024/08/02/huNLZglFzj65MmO.jpg
 
 # C语言结构体学习
 
+### 感谢博主：
+
+[C语言详解：结构体_c语言结构体语法-CSDN博客](https://blog.csdn.net/yourfriendyo/article/details/119544221)
+
+[C语言结构体（struct）最全的讲解（万字干货）_struct a *b(const char *name)-CSDN博客](https://blog.csdn.net/lyh290188/article/details/104326450)
+
 ### 结构体理论知识
 
 结构体(struct)是由一系列具有相同类型或不同类型的数据构成的数据集合，也叫结构。

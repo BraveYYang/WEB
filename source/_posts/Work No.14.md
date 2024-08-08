@@ -8,6 +8,12 @@ index_img: https://s2.loli.net/2024/07/31/OocearM37hWYHTp.jpg
 
 # C语言数组学习
 
+### 感谢博主：
+
+[【C语言 | 数组】C语言数组详解(经典，超详细)-CSDN博客](https://blog.csdn.net/wkd_007/article/details/134400060)
+
+[C 数组 | 菜鸟教程 (runoob.com)](https://www.runoob.com/cprogramming/c-arrays.html)
+
 ### 计算机基础单位和数据类型
 
 其中在C语言中的一些特定的数据类型存储也是有一定的范围的：
