@@ -269,6 +269,10 @@ Key type：Authentication Key
 	//将本地分支推送到远程分支，如果远程分支不存在，则创建。
 	$ git push <远程主机名> <本地分支名>:<远程分支名>
 	$ git push --set-upstream origin dev
+	
+	//跟踪远程分支
+	git checkout -b zhanghanlun origin/zhanghanlun
+	//用于解决远程 HEAD 指向一个不存在的引用，无法检出。
 ```
 
 ### 将文件推送到云端仓库
