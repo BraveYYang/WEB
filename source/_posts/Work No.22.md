@@ -1,12 +1,12 @@
 ---
-title: Python学习-2
+title: Python-切片、迭代、类和实例
 tag: Python
 date: 2024-08-12
 categories: Python
 index_img: https://s2.loli.net/2024/08/02/1wdIJmxaylcsK9j.jpg
 ---
 
-# Python学习-2
+# Python-切片、迭代、类和实例
 
 ## 感谢博主：
 

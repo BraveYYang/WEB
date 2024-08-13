@@ -1,12 +1,12 @@
 ---
-title: Python学习-1
+title: Python-变量、列表、元组、字典、函数
 tag: Python
 date: 2024-08-12
 categories: Python
 index_img: https://s2.loli.net/2024/08/02/Saf2h5bePzUvB4A.jpg
 ---
 
-# Python学习-1
+# Python-变量、列表、元组、字典、函数
 
 ## 感谢博主：
 
