@@ -35,13 +35,13 @@ index_img: https://s2.loli.net/2024/07/31/mBz1ZMHwft8nRUc.jpg
 
 ## git使用方法
 
-### 注册GitHub账号
+#### 注册GitHub账号
 
 账号：1
 
 密码：1
 
-### git注册
+#### git注册
 
 ```
 	//设置账号，如果去掉 --global 参数只对当前仓库有效。
@@ -59,7 +59,7 @@ index_img: https://s2.loli.net/2024/07/31/mBz1ZMHwft8nRUc.jpg
 	id_rsa为私人密钥
 ```
 
-### github配置SSH
+#### github配置SSH
 
 **打开id_rsa.pub文件，全选，复制全文**
 
@@ -74,7 +74,7 @@ Title：1
 
 Key type：Authentication Key
 
-### 测试是否成功连接
+#### 测试是否成功连接
 
 ```
 	$ ssh -T git@github.com
@@ -82,7 +82,7 @@ Key type：Authentication Key
 	Hi yangyangdeyi0119! You've successfully authenticated, but GitHub does not provide shell access.  
 ```
 
-### 建立Github云端仓库
+#### 建立Github云端仓库
 
 [github仓库建立及配置教程新手教程_github创建仓库-CSDN博客](https://blog.csdn.net/qq_44722674/article/details/117200397)
 
@@ -90,7 +90,7 @@ Key type：Authentication Key
 
 [GitHub修改昵称和用户名（图解详细教程）_github改名-CSDN博客](https://blog.csdn.net/weixin_44285445/article/details/107833418)
 
-### 创建本地仓库
+#### 创建本地仓库
 
 ```
 	//首先需要新建一个文件夹作为本地仓库
@@ -101,7 +101,7 @@ Key type：Authentication Key
 	$ git clone https://github.com/yangyangdeyi0119/test.git  
 ```
 
-### 将文件加入暂存区
+#### 将文件加入暂存区
 
 文件本身在工作区，需要通过文件锁定，将其加入暂存区
 
@@ -132,7 +132,7 @@ Key type：Authentication Key
 	- Staged 已暂存状态
 ```
 
-### 将文件移除暂存区
+#### 将文件移除暂存区
 
 ```
 	//仅删除暂存区的文件，不影响工作区的文件
@@ -152,7 +152,7 @@ Key type：Authentication Key
 	
 ```
 
-### 查看文件状态
+#### 查看文件状态
 
 ```
 	//获取文件状态-完整
@@ -194,7 +194,7 @@ Key type：Authentication Key
 		--stage(-s) 显示mode以及文件对应的Blob对象，进而我们可以获取暂存区中对应文件里面的内容。
 ```
 
-### 文件加入分支
+#### 文件加入分支
 
 提交更改，实际上就是把暂存区的所有内容提交到当前分支，需要提交的文件修改通通放到暂存区；然后，一次性提交暂存区的所有修改
 
@@ -227,7 +227,7 @@ Key type：Authentication Key
     git log --oneline
 ```
 
-### 分支管理
+#### 分支管理
 
 ```
 	//创建分支命令
@@ -275,7 +275,7 @@ Key type：Authentication Key
 	//用于解决远程 HEAD 指向一个不存在的引用，无法检出。
 ```
 
-### 将文件推送到云端仓库
+#### 将文件推送到云端仓库
 
 ```
 	//第一次推送代码指令
@@ -314,7 +314,7 @@ Key type：Authentication Key
 	$ git remote set-url origin URL
 ```
 
-### 暂存空间使用
+#### 暂存空间使用
 
 stash是本地的，不会通过git push命令上传到git server上
 
@@ -353,7 +353,7 @@ stash是本地的，不会通过git push命令上传到git server上
 	$ git stash branch
 ```
 
-### 代码标签
+#### 代码标签
 
 tag 中文我们可以称它为标签，tag 就是 对某次 commit 的一个标识，相当于起了一个别名。
 
@@ -396,3 +396,135 @@ tag 中文我们可以称它为标签，tag 就是 对某次 commit 的一个标
 	$ git push origin  :regs/tags/<tagname>
 	$ git push origin --delete <tagname>
 ```
+
+#### 一台电脑多个ssh账号的注册
+
+情况所有的ssh，不清空也行，清空更快一些
+
+```
+git config --global --unset user.name
+git config --global --unset user.email
+```
+
+注册两个账号
+
+```
+# 生成github的ssh-key，注册邮箱填github的注册邮箱，然后在用户主目录下/.ssh/下会生成id_rsa(私钥)、id_rsa.pub(公钥)
+$ ssh-keygen -t rsa -C "注册邮箱" -f ~/.ssh/id_rsa 
+# 生成gitlab的ssh-key，注册邮箱填gitlab的注册邮箱,然后在用户主目录下/.ssh/下会生成id_rsa_work(私钥)、id_rsa_work.pub(公钥)
+$ ssh-keygen -t rsa -C "注册邮箱" -f ~/.ssh/id_rsa_work
+```
+
+添加全局权限，可以不用每次都输密码
+
+```
+$ ssh-agent bash
+$ ssh-add ~/.ssh/id_rsa
+$ ssh-add ~/.ssh/id_rsa_work
+$ ssh-add -l 
+#如果添加成功，这里会打印对应的配置信息
+```
+
+配置config文件
+
+```
+$ vim ~/.ssh/config  //创建配置文件
+
+# 账号1-github
+HOST github.com #github别名
+hostname github.com  #github地址
+User githubUsername #github用户名
+IdentityFile /home/user/.ssh/id_rsa_work #github私钥地址
+PreferredAuthentications publickey #首选认证方式
+
+# 账号2-creality
+HOST gerrit #gitlab私服别名
+hostname xxx.xx.xxx.xx #gitlab私服地址
+Port xxxx #端口
+User xxxxxxxxxx #填写gitlab私服的用户名
+IdentityFile /home/user/.ssh/id_rsa_work #gitlab私钥地址
+PreferredAuthentications publickey #首选认证方式
+```
+
+需要去网站上面配置ssh，参照最上面内容
+
+测试是否连接成功
+
+```
+$ ssh -T git@github.com
+$ ssh -T git@git.gitlab.com
+```
+
+遇到的问题
+1.测试Gitlab的SSH Key是否连接成功，出现Permission denied (publickey).
+
+```
+$ ssh -T git@git.gitlab.com
+git@git.gitlab.com: Permission denied (publickey).
+
+#使用ssh -v查看详细日志
+$ ssh -vT git@git.gitlab.com
+...
+...
+debug1: send_pubkey_test: no mutual signature algorithm
+debug1: No more authentication methods to try.
+git@git.gitlab.com: Permission denied (publickey).
+```
+
+关注的最后面三行日志，显示没有匹配的算法，查阅相关资料，openssh8.2版本之后，默认关闭SSH-RSA算法，该算法存在安全隐患（OpenSSH to deprecate SHA-1 logins due to security risk | ZDNet），当然我们可以重新启用它，但存在安全风险。在config的Gitlab配置中添加如下一行
+
+```
+PubkeyAcceptedKeyTypes +ssh-rsa
+再次运行
+```
+
+```
+$ ssh -T git@git.gitlab.com
+出现 You’ve successfully authenticated, but GitHub does not provide shell access，连接成功！
+```
+
+最后在对应的项目下设置对应的用户名以及邮箱名就可以快乐的提交代码了
+
+```
+git config  user.email "useremail"
+git config  user.name "username"
+```
+
+## 私有库的访问
+
+私有库的访问需要设置token，在git clone 的时候输入密码时把token输入进去，才可以实现git clone出来
+
+```
+Settings->Developer settings->Personal access tokens->Generate new token。
+创建新的访问密钥，勾选repo栏，选择有效期，为密钥命名。
+复制这段密钥。（注意，密钥只显示一次，记得妥善保管）
+git push时，作为用户密码来使用。
+```
+
+私有库每次都需要输入账号密码的解决办法
+
+全局设置（只有一个账号）
+
+```
+git config --global credential.helper store
+
+git config --global user.email "email"
+git confgi --global user.name "name"
+```
+
+局部设置（多个账号）
+
+```
+## local
+git config --local credential.helper store
+
+git config --local user.email "email"
+git config --local user.name "name"
+```
+
+之后配置token
+
+```
+git remote set-url origin https://github.com/xxx/xxx.git
+```
+

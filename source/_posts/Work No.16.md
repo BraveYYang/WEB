@@ -257,3 +257,139 @@ int searchLint(Lint* p, int num){
 }
 ```
 
+## 项目实践总结
+
+链表的使用主要分为5个部分
+
+1.创建数据结构体
+
+```
+// 消息结构体定义
+typedef struct MsgSend {
+    char *cmdStr;       // 发送命令，实际的命令存储区
+    uint32_t cmdLen;    // 命令长度，该命令长度
+    struct list_head node; //链表节点定义
+}MsgSend_t;
+```
+
+2.创建链表头定义
+
+```
+// 定义链表头结点
+static struct list_head External_List;
+```
+
+3.链表初始化
+
+```
+// 初始化链表头
+INIT_LIST_HEAD(&External_List);
+```
+
+4.创建互斥锁或读写锁
+
+```
+static pthread_rwlock_t Ext_rwLock; // 声明一个读写锁
+```
+
+5.打开互斥锁或读写锁遍历链表（增删改查）
+
+```
+//计算链表长度
+	
+	// 读写锁
+    pthread_rwlock_rdlock(&Ext_rwLock);
+    // 遍历链表
+    list_for_each(list_temp, &External_List)
+    {
+        // 每遍历一个加数值
+        list_len++;
+    }
+    pthread_rwlock_unlock(&Ext_rwLock);
+    
+// 删除所有节点
+    
+    // 链表读写锁
+    pthread_rwlock_wrlock(&Ext_rwLock);
+    // 遍历链表并安全删除节点
+    list_for_each_entry_safe(temp, next, &External_List, node)
+    {
+        // 当前节点存在数据，则清空数据
+        if (temp->cmdStr != NULL)
+        {
+            free(temp->cmdStr); // 释放 cmdStr 指针
+            // 再次指向空值，防止清空失败
+            temp->cmdStr = NULL;
+        }
+        // 从链表中删除节点
+        list_del_init(&temp->node);
+        // 链表节点不为空
+        if (temp != NULL)
+        {
+            free(temp);  // 释放节点
+            temp = NULL; // 释放后置为NULL，防止野指针
+        }
+    }
+    pthread_rwlock_unlock(&Ext_rwLock);
+    
+// 删除所有节点
+
+	// 链表读写锁
+    pthread_rwlock_wrlock(&Ext_rwLock);
+    // 遍历链表并安全删除节点
+    list_for_each_entry_safe(temp, next, &External_List, node)
+    {
+        // 寻找链表ID和要删除的ID一致的链表，ID是唯一的
+        if (temp->cmdId == deletelist->cmdId)
+        {
+            // 从链表中删除节点
+            list_del_init(&temp->node);
+            // 当前节点存在数据，则清空数据
+            if (temp->cmdStr != NULL)
+            {
+                free(temp->cmdStr);  // 释放节点
+                temp->cmdStr = NULL; // 释放后置为NULL，防止野指针
+            }
+            // 链表节点不为空
+            if (temp != NULL)
+            {
+                free(temp);  // 释放节点
+                temp = NULL; // 释放后置为NULL，防止野指针
+            }
+            break; // 完成清除后直接退出链表
+        }
+    }
+    pthread_rwlock_unlock(&Ext_rwLock);
+    
+// 复制链表到链表
+
+	// 定义临时节点，用于获取链表数据
+	ExtMsgSend_t *temp = NULL, *snext = NULL;
+	// 链表读写锁
+	pthread_rwlock_wrlock(&Ext_rwLock);
+	// 遍历列表和ID值进行比对
+    list_for_each_entry_safe(temp, snext, &External_List, node)
+    {
+    	// 找到ID值
+        if (temp->cmdId == id)
+        {
+            // 将所有链表值复制到Send_List链表中
+            memcpy(Send_List, temp, sizeof(ExtMsgSend_t));
+            // 退出遍历
+            break;
+        }
+    	else
+    	{
+            // 如果不是则进行提示
+            LogW("APP recvjson cmdId is unable to match\n");
+        }
+    }
+    pthread_rwlock_unlock(&Ext_rwLock);
+    
+// 写入链表
+
+	pthread_rwlock_wrlock(&Ext_rwLock);              // 上锁
+    list_add_tail(&ExMsgSend->node, &External_List); // 写入
+    pthread_rwlock_unlock(&Ext_rwLock);              // 解锁
+```
+

@@ -3,7 +3,7 @@ title: Makefile文件
 tag: C/C++
 date: 2024-08-14
 categories: C/C++编译
-index_img: https://s2.loli.net/2024/08/14/Fd2frTmakCOvXUl.jpg
+index_img: https://s2.loli.net/2024/08/15/QdvBaUHkV3xjnFw.jpg
 ---
 
 # Makefile文件

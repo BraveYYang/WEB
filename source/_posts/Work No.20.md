@@ -155,6 +155,39 @@ if(ret == -1)
 }
 ```
 
+### 消息队列信息情况核实
+
+```
+    struct msqid_ds queue_info;
+    if (msgctl(ID, IPC_STAT, &queue_info) == -1) {
+        printf("Failed to get queue info for control_queue_ID: %d, errno = %d, error: %s\n", ID, errno, strerror(errno));
+    } else {
+        printf("Control queue status - messages: %ld\n", queue_info.msg_qnum);//检查消息的数量
+        printf("Max size of message: %ld\n", queue_info.msg_qbytes);//检查消息的最大限制长度
+    }
+    
+    //output
+    Control queue status - messages: 0
+```
+
+### 终端查看消息队列
+
+```
+ipcs命令
+ipcs -a ：显示全部可以显示的信息
+ipcs -q：显示活动的消息队列
+ipcs -m：显示活动的共享内存信息
+ipcs -s：显示活动的信号量信息
+
+ipcrm命令：
+ipcrm -m id：删除共享内存标识
+ipcrm -M key：删除由关键字创建的共享内存标识
+ipcrm -q id ：删除消息队列标识 id和其相关的消息队列和数据结构
+ipcrm -Q key：删除由关键字key创建的消息队列和其相关的消息队列和数据结构
+ipcs -s id：删除信号标识符id和其相关的信号量集及数据结构
+ipcs -S key:删除由关键字key创建的信号量标识及其相关的信号量集及数据结构
+```
+
 ## 消息队列优势
 
 1、采用消息队列通信比采用管道通信具有更多的灵活性，通信的进程不但没有血缘上的要求，也不需要进行同步处理。
