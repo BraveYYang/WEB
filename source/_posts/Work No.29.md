@@ -3,7 +3,7 @@ title: Python
 tag: Python
 date: 2024-09-14
 categories: Python
-index_img: 
+index_img: https://s2.loli.net/2024/08/15/KJRkgUqc7CiYy2M.png
 ---
 
 # Python

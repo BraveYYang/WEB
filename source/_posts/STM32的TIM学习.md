@@ -3,7 +3,7 @@ title: STM32的TIM学习
 tag: TIM
 date: 2024-09-12
 categories: STM32
-index_img: 
+index_img: https://s2.loli.net/2024/08/15/McDF8GUdLIQNSpy.jpg
 ---
 
 # STM32的TIM学习
@@ -62,5 +62,101 @@ TIM_ForcedAction_Active
 TIM_ForcedAction_InActive
 作用：强制输出低电平，忽略计数器的比较操作。
 应用场景：用于强制将输出设为低电平，例如复位某些信号或设备。
+```
+
+## 代码实现PWM互补输出
+
+```
+void TIM_1_Config(void)
+{
+	// 结构体初始化
+	GPIO_InitTypeDef GPIO_InitStruct;
+	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStruct;
+	TIM_OCInitTypeDef TIM_OCInitStruct;
+	TIM_BDTRInitTypeDef TIM_BDTRInitStruct;
+	
+	// 打开时钟
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
+	
+	// 引脚的复用，必须在配置之前
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource8, GPIO_AF_TIM1);
+	GPIO_PinAFConfig(GPIOB, GPIO_PinSource13, GPIO_AF_TIM1);
+	GPIO_PinAFConfig(GPIOB, GPIO_PinSource12, GPIO_AF_TIM1);
+	
+	// PWM正向输出引脚
+	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_8;
+	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF;
+	GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_100MHz;
+	GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	GPIO_Init(GPIOA, &GPIO_InitStruct);
+	
+	// PWM互补输出引脚
+	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_13;
+	GPIO_Init(GPIOB, &GPIO_InitStruct);
+	
+	// 断路保护输出引脚
+	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_12;
+	GPIO_Init(GPIOB, &GPIO_InitStruct);
+	
+	// 重装载计数器，主要用于实现定时器的计数总数
+	TIM_TimeBaseInitStruct.TIM_Period = 280-1; //600KHz = 1.67us
+	// 设定定时器频率为=TIMxCLK(168000000Hz)/(TIM_Prescaler+1)=100000Hz，单次计数的时间
+	TIM_TimeBaseInitStruct.TIM_Prescaler = 1 - 1;
+	// 定时器的计数方向
+	TIM_TimeBaseInitStruct.TIM_CounterMode = TIM_CounterMode_Up;
+	// 重复计数，等效于上面TIM_Period * n ,方便用于控制产生多少个pwm波
+	TIM_TimeBaseInitStruct.TIM_RepetitionCounter = 0;
+	// 时钟分频，在计算死区时间的时候会用到
+	TIM_TimeBaseInitStruct.TIM_ClockDivision = TIM_CKD_DIV1;
+	// 配置结构体
+	TIM_TimeBaseInit(TIM1, &TIM_TimeBaseInitStruct);
+	
+	// 输出比较模式选择PWM1，
+	TIM_OCInitStruct.TIM_OCMode = TIM_OCMode_PWM1;
+	// 主输出引脚使能
+	TIM_OCInitStruct.TIM_OutputState = TIM_OutputState_Enable;
+	// 互补输出使能
+	TIM_OCInitStruct.TIM_OutputNState = TIM_OutputNState_Enable;
+	// 脉冲调制宽度，也就是占空比 = 重装载计数器/脉冲调制宽度
+	TIM_OCInitStruct.TIM_Pulse = 140;
+	// 主输出的高电平有效，也就是高电平作为输出信号，反之则为低电平
+	TIM_OCInitStruct.TIM_OCPolarity = TIM_OCPolarity_High;
+	// 互补输出的高电平有效，也就是高电平作为输出信号，反之则为低电平
+	TIM_OCInitStruct.TIM_OCNPolarity = TIM_OCNPolarity_High;
+	// 当停止计数器时，比较器稳定为高电平，保证输出到引脚的信号是一致稳定的
+	TIM_OCInitStruct.TIM_OCIdleState = TIM_OCIdleState_Set;
+	// 当停止计数器时，比较器稳定为高电平，保证输出到引脚的信号是一致稳定的
+	TIM_OCInitStruct.TIM_OCNIdleState = TIM_OCNIdleState_Reset;
+	// 配置通道1的输出比较
+	TIM_OC1Init(TIM1, &TIM_OCInitStruct);
+	// 配置预装载，在改变脉冲的时候能够让数据更加平缓和准确
+	TIM_OC1PreloadConfig(TIM1, TIM_OCPreload_Enable);
+	
+	// 自动输出使能，在停止时或者特定状态时，保证引脚的输出是想要的状态，确保状态一致
+	TIM_BDTRInitStruct.TIM_OSSRState = TIM_OSSRState_Enable;
+	// 自动输出使能，在空闲状态时，保证引脚的输出是想要的状态，确保状态一致
+	TIM_BDTRInitStruct.TIM_OSSIState = TIM_OSSIState_Enable;
+	// 锁定定时器的部分配置，防止被篡改
+	TIM_BDTRInitStruct.TIM_LOCKLevel = TIM_LOCKLevel_1;
+	// 死区时间的配置
+	TIM_BDTRInitStruct.TIM_DeadTime = 11;
+	// 断路保护功能，将输出引脚复位至TIM_OCIdleState或TIM_OCNIdleState设定的状态
+	TIM_BDTRInitStruct.TIM_Break = TIM_Break_Enable;
+	// 触发断路保护时引脚的电平信号,引脚的初始化为高电平，如果设置为高电平触发的话，无法生成PWM
+	TIM_BDTRInitStruct.TIM_BreakPolarity = TIM_BreakPolarity_Low;
+	// 发生短路时，开启自动断路保护
+	TIM_BDTRInitStruct.TIM_AutomaticOutput = TIM_AutomaticOutput_Enable;
+	// 配置死区定时器
+	TIM_BDTRConfig(TIM1, &TIM_BDTRInitStruct);
+	
+	// 使能定时器
+  	TIM_Cmd(TIM1, ENABLE);
+
+    // 用于开启高级定时器的PWM输出功能，可以初始化时进行配置，也可以在后续使用时配置
+    TIM_CtrlPWMOutputs(TIM1, ENABLE);
+}
 ```
 
